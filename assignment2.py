@@ -31,9 +31,20 @@ def process_data(file_contents):
 
 
 def display_person(input_id, person_data):
-    pprint(person_data)
-    print('Person {} is {} with a birthday of {}'.format(person_data.get('id'), person_data.get('name'),
-                                                           person_data.get('birthday')))
+    # pprint(person_data)
+    id_number = int(input_id)
+
+    if id_number in person_data:
+        id_info = person_data[id_number]
+        (name, birthday) = id_info
+        pprint(person_data)
+        print('Person {} is {} with a birthday of {}'.format(id_number, name, birthday))
+    elif id_number > 0:
+        print('id number does not match')
+        exit()
+    elif id_number <= 0:
+        print('id number must be at least 1')
+        exit()
 
 
 def assignment_2():
@@ -59,5 +70,7 @@ if __name__ == "__main__":
     process_output = process_data(csv_output)
     #except Exception as e:
         #print(e)
-    display_output = display_person(1, process_output)
+    user_input = input('Please input an id number: ')
+    display_output = display_person(user_input, process_output)
+
 
